@@ -9,6 +9,7 @@
 </template>
 <script setup lang="ts">
   import type { ISharedInputProps, ISharedInputEmits } from './SharedInput.types';
+  
   const emits = defineEmits<ISharedInputEmits>();
   const props = defineProps<ISharedInputProps>();
 
@@ -19,7 +20,7 @@
     set(value: string) {
         emits('update:modelValue', value)
     }
-  })
+  });
 
 </script>
 

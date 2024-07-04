@@ -19,56 +19,71 @@
   import type {ICard} from '~/store/card/card.types';
   import { useCardStore } from '~/store/card/cards';
 
-  const cardStore = useCardStore()
+  const cardStore = useCardStore();
   const router = useRouter();
 
   const errors = ref<ICard>({
     name:'',
     description:''
-  })
+  });
 
   const cardData = ref<ICard>({
     name: '',
     description: ''
-  })
+  });
+
+
+  // Правила валидации //
+
+  const validateField = (field:string, value:string) => {
+    if (!value) {
+      return '* поле обязательно для заполнения'
+    }
+    if (value.length < 5) {
+      return '* полe должно содержать не менее 5 символов'
+    }
+    return ''
+  };
+
+  // Непосредствено валидация полей name и description //
+
+  const validateForm = () => {
+    errors.value.name = validateField('name', cardData.value.name)
+    errors.value.description = validateField('description', cardData.value.description)
+  };
+
+  // Отслеживание изменений в обьекте cardData //
+
+  watch(cardData, validateForm, {deep:true});
+
+  // Вычисление и возвращение результата валдиации форм //
+  const isFormValid = computed(() => {
+    return (
+      !errors.value.name &&
+      !errors.value.description &&
+      cardData.value.name &&
+      cardData.value.name.length >= 5 &&
+      cardData.value.description &&
+      cardData.value.description.length >= 5
+    );
+  });
 
   const addCardToStore = () => {
-    if(!errors.value.name && !errors.value.description) {
       cardStore.addCard(cardData.value);
       router.push('/')
-    } else {
-      return
-    }
-  }
+  };
 
   const addCard = () => {
-    addCardToStore();
-  }
-
-  const validateName = () => {
-  if (!cardData.value.name.trim()) {
-    errors.value.name = '*поле Name обязательно для заполнения';
-  } else {
-    errors.value.name = cardData.value.name.length < 5 ? '*поле должно содержать не менее 5 символов' : '';
-  }
+    validateForm();
+    if (isFormValid.value) {
+      addCardToStore();
+    }
   };
-
-  const validateDescription = () => {
-  if (!cardData.value.description.trim()) {
-    errors.value.description = '*поле Description обязательно для заполнения';
-  } else {
-    errors.value.description = cardData.value.description.length < 5 ? '*поле должно содержать не менее 5 символов' : '';
-  }
-  };
-  
-  watch(cardData, () => {
-    validateName();
-    validateDescription();
-  }, {deep:true})
 
   const main = () => {
   router.push('/');
-  }
+  };
+  
 </script>
 <style>
   .addition {

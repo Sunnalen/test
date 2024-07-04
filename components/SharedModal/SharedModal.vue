@@ -9,18 +9,16 @@
     </div>
   </div>
 </template>
-<script setup>
- const close = ref(true)
+<script setup lang="ts">
+  import type { ISharedModalProps } from './SharedModal.types';
 
-  const props = defineProps({
-    card: Object
-  })
+  const close = ref(true);
 
-  const { emit } = defineEmits();
+  const props = defineProps<ISharedModalProps>();
 
   const closeModal = () => {
     close.value = false
-  }
+  };
 </script>
 
 <style>

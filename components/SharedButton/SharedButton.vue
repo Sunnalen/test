@@ -3,11 +3,13 @@
 </template>
 <script setup lang="ts">
   import type { ISharedButtonProps, TButtonSizeClass,  } from './SharedButton.types';
-  const props = defineProps<ISharedButtonProps>()
+
+  const props = defineProps<ISharedButtonProps>();
+  
   const buttonSize: TButtonSizeClass = {
     l: 'btn__large',
     m: 'btn__medium'
-  }
+  };
 </script>
 <style>
   .btn {

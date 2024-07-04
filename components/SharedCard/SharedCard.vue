@@ -9,13 +9,9 @@
   </div>
 </template>
 <script setup lang="ts">
-  const props = defineProps({
-    card: {
-      type: Object,
-      required: true,
-      default: () => {}
-    }
-  })
+import type { ICard } from '~/store/card/card.types';
+
+const props = defineProps<{card: ICard}>();
 </script>
 <style>
   .card {

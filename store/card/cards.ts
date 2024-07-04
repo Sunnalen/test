@@ -12,36 +12,34 @@ export const useCardStore = defineStore('cardStore', () => {
       name: 'Name',
       description: 'Description'
     }
-  ])
+  ]);
 
   // добавление карточки //
   const addCard = (newCard: ICard) => {
     cardList.value.push(newCard); 
     saveCardsToLocalStorage();
-}
+  }
+
+  // установка списка карточек //
+  const setCards = (cards: ICard[]) => {
+    cardList.value = cards;
+  };
 
   // получение всего списка карточек //
   const getAllCards = () => {
     return cardList.value;
-  }
+  };
 
   // сохранение карточки в локальном хранилище //
   const saveCardsToLocalStorage = () => {
     localStorage.setItem('cards', JSON.stringify(cardList.value));
-  }
-
-  onMounted(() => {
-    const storedCards = localStorage.getItem('cards');
-    if (storedCards) {
-      cardList.value = JSON.parse(storedCards);
-      localStorage.clear()
-    }
-  });
+  };
   
   return {
     cardList,
     addCard,
     getAllCards,
+    setCards,
     saveCardsToLocalStorage
   }
-})
+});
