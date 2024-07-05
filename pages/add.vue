@@ -34,7 +34,6 @@
 
 
   // Правила валидации //
-
   const validateField = (field:string, value:string) => {
     if (!value) {
       return '* поле обязательно для заполнения'
@@ -46,14 +45,12 @@
   };
 
   // Непосредствено валидация полей name и description //
-
   const validateForm = () => {
     errors.value.name = validateField('name', cardData.value.name)
     errors.value.description = validateField('description', cardData.value.description)
   };
 
   // Отслеживание изменений в обьекте cardData //
-
   watch(cardData, validateForm, {deep:true});
 
   // Вычисление и возвращение результата валдиации форм //
@@ -83,29 +80,25 @@
   const main = () => {
   router.push('/');
   };
-  
 </script>
-<style>
+
+<style lang="scss"> 
   .addition {
     display: flex;
     justify-content: center;
-  }
 
-  .container {
-    padding: 5px;
-  }
+    &__inner {
+      padding: 50px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border: 1px solid lightgray;
+      border-radius: 10px;
+    }
 
-  .addition__inner {
-    padding: 50px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 1px solid lightgray;
-    border-radius: 10px;
-  }
-
-  .addition__btn {
-    display: flex;
-    gap: 15px;
+    &__btn {
+      display: flex;
+      gap: 15px;
+    }
   }
 </style>

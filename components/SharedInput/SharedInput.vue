@@ -7,6 +7,7 @@
     <span class="field__error" v-if="error">{{ error }}</span>
   </div>
 </template>
+
 <script setup lang="ts">
   import type { ISharedInputProps, ISharedInputEmits } from './SharedInput.types';
   
@@ -21,38 +22,37 @@
         emits('update:modelValue', value)
     }
   });
-
 </script>
 
-<style>
+<style lang="scss">
   .field {
     width: 200px;
     display: flex;
     flex-direction: column;
-    margin-bottom: 25px;
-  }
+    margin-bottom: var(--indent-xl);
 
-  .field__name {
-    font-size: 18px;
-  }
+    &__name {
+      font-size: var(--font-size-m);
+    }
 
-  .field__input {
-    border: 1px solid black;
-    border-radius: 5px;
-  }
+    &__input {
+      border: 1px solid black;
+      border-radius: 5px;
 
-  .field__input:focus {
-    border: 1px solid blue;
-    outline: none;
-  }
+      &:focus {
+        border: 1px solid blue;
+        outline: none;
+      }
 
-  .field__input-error {
-    border: 1px solid red;
-    outline: none;
-  }
-  
-  .field__error {
-    font-size: 15px;
-    color: red;
+      &-error {
+        border: 1px solid red;
+        outline: none;
+      }
+    }
+
+    &__error {
+      font-size: var(--font-size-s);
+      color: red;
+    }
   }
 </style>

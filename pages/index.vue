@@ -33,28 +33,25 @@
     </div>
   </div>
 </template>
+
 <script setup>
   import { useRouter } from 'vue-router';
   import SharedButton from '~/components/SharedButton/SharedButton.vue';
   import { useCardStore } from '~/store/card/cards';
   import draggable from 'vuedraggable';
+  import { useDragAndDrop } from '~/composables/useDragAndDrop';
 
   const cardStore = useCardStore();
   const router = useRouter();
 
-  const disableDragDrop = ref(false);
   const IsSelectedCard = ref(null);
-
-
-  const cardList = ref(cardStore.getAllCards());
+  const {cardList} = storeToRefs(cardStore)
+  const {disableDragDrop, handleEnd} = useDragAndDrop();
 
   const add = () => {
     router.push('/add')
   };
 
-  const handleEnd = () => {
-    cardStore.saveCardsToLocalStorage()
-  };
 
   const handleModalClose = () => {
     IsSelectedCard.value = null;
@@ -75,20 +72,17 @@
   watch(cardList, (newList) => {
       cardStore.setCards(newList);
       cardStore.saveCardsToLocalStorage();
-    }, { deep: true });
+  }, { deep: true });
 
 </script>
-<style>
+
+<style lang="scss">
   .main {
     display: flex;
     justify-content: center;
   }
 
-  .container {
-    padding: 5px;
-  }
-
-  .inner{
+  .inner {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -97,14 +91,14 @@
   .header {
     display: flex;
     flex-direction: column;
+
+    &__checkbox {
+      margin-bottom: 15px;
+    }
   }
 
-  .header__checkbox {
-    margin-bottom: 15px;
-  }
-  
   .card__list {
-    padding: 20px;
+    padding: var(--indent-l);
     display: grid; 
     grid-template-columns: repeat(4, 1fr);
     gap: 15px 45px;

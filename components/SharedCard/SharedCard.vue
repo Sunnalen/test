@@ -8,14 +8,16 @@
     </div>
   </div>
 </template>
+
 <script setup lang="ts">
 import type { ICard } from '~/store/card/card.types';
 
 const props = defineProps<{card: ICard}>();
 </script>
-<style>
+
+<style lang="scss">
   .card {
-    padding: 5px;
+    padding: var(--indent-s);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -23,9 +25,9 @@ const props = defineProps<{card: ICard}>();
     border-radius: 5px;
     transition: box-shadow 0.3ms;
     cursor: pointer;
+
+    &:hover {
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
   }
-  .card:hover{
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  }
-  
 </style>

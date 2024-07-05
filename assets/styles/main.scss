@@ -1,0 +1,6 @@
+@use 'fonts';
+@use 'indents';
+
+.container {
+  padding: var(--indent-s);
+}

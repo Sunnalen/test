@@ -25,11 +25,6 @@ export const useCardStore = defineStore('cardStore', () => {
     cardList.value = cards;
   };
 
-  // получение всего списка карточек //
-  const getAllCards = () => {
-    return cardList.value;
-  };
-
   // сохранение карточки в локальном хранилище //
   const saveCardsToLocalStorage = () => {
     localStorage.setItem('cards', JSON.stringify(cardList.value));
@@ -38,7 +33,6 @@ export const useCardStore = defineStore('cardStore', () => {
   return {
     cardList,
     addCard,
-    getAllCards,
     setCards,
     saveCardsToLocalStorage
   }
